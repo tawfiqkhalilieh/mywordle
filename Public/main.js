@@ -94,7 +94,7 @@ document.addEventListener("keypress", async (event) => {
           const api_win_check = await axios.get(
             `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
           );
-          console.log(api_win_check.data.colors);
+          console.log(`api_win_check`.data.colors);
           wordToSubmit = "";
           if (api_win_check.data.win) {
             alert("You Win!");

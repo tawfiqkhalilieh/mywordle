@@ -5625,7 +5625,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Welcome to demo express server");
+  res.send("Welcome to wordle express backend!");
+});
+
+app.get("/health", (req, res) => {
+  res.send("I am very healthy");
 });
 
 app.get("/check/word/:word", (req, res) => {
@@ -5643,16 +5647,31 @@ app.get("/check/word/:word", (req, res) => {
         colors[i] = "green";
       } else {
         if (wordArr.includes(myWord[i])) {
-          const times = [];
-          let temp_bool = true;
-          for (j = 0; j < 5; j++) {
-            if (myWord[j] === myWord[i] && i != j) {
-              colors[i] = "gray";
-              temp_bool = false;
+          let times = 0;
+          let realtimes = -2;
+          let temp_bool = false;
+          for (let k = 0; k < 5; k++) {
+            if (myWord[i] === myWord[k]) {
+              realtimes += 1;
             }
+            // console.log(k);
           }
-          if (temp_bool) {
-            colors[i] = "yellow";
+          for (j = 0; j < 5; j++) {
+            if (myWord[j] === myWord[i] && i != j) times += 1;
+            if (realtimes !== 0) {
+              realtimes -= 1;
+              colors[j] = "yellow";
+            } else {
+              colors[j] = "gray";
+            }
+            // if (times > realtimes - 1) {
+            //
+            //   temp_bool = true;
+            // } else {
+            //   if (temp_bool) {
+            //     colors[j] = "gray";
+            //   }
+            // }
           }
         } else {
           colors[i] = "gray";
