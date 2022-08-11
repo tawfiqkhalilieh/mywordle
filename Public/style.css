@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(135, 204, 204);
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+}
+
+.letter {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(9, 255, 0);
+  border: 3px solid rgb(30, 0, 255);
+  margin: 5px;
+  font-size: 30px;
+  /* padding: 25px; */
+}
+.letter:hover {
+  transform: scale(1.1);
+}
+
+.word {
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  width: 100%;
+}
