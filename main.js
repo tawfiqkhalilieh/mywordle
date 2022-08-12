@@ -2,6 +2,29 @@ let curWord = 0;
 let curChar = 0;
 const target = document.querySelector("#game");
 let isWinner = false;
+
+let theme_status = true;
+const theme = () => {
+  document.body.classList.toggle("light");
+  const letters = document.querySelectorAll(".letter");
+  if (theme_status) {
+    document.getElementById("header").classList.add("light");
+    document.getElementById("header").classList.remove("dark");
+    document.getElementById("header").classList.theme_status = false;
+    for (let i = 0; i < letters.length; i++) {
+      letters[i].classList.add("light");
+    }
+    theme_status = false;
+  } else {
+    document.getElementById("header").classList.add("dark");
+    document.getElementById("header").classList.remove("light");
+    for (let i = 0; i < letters.length; i++) {
+      letters[i].classList.remove("light");
+    }
+    theme_status = true;
+  }
+};
+
 const animateCSS = (element, animation, prefix = "animate__") =>
   // We create a Promise and return it
   new Promise((resolve, reject) => {

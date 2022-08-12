@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+let wordOfTheDay = "hello";
 // const axios = require("axios");
 const words = [
   "which",
@@ -5624,22 +5625,18 @@ const words = [
 app.use(express.json());
 app.use(cors());
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to wordle express backend!");
-// });
-
 app.get("/health", (req, res) => {
   res.send("I am very healthy");
 });
 
 app.get("/check/word/:word", (req, res) => {
-  if (req.params.word === "hello") {
+  if (req.params.word === wordOfTheDay) {
     res.json({
       win: true,
       colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
     });
   } else {
-    const wordArr = ["h", "e", "l", "l", "o"];
+    const wordArr = `${wordOfTheDay}`.split("");
     const colors = ["#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c"];
     const myWord = `${req.params.word}`.split("");
     for (let i = 0; i < 5; i++) {
@@ -5684,6 +5681,32 @@ app.get("/check/word/:word", (req, res) => {
 
 app.get("/check/inwords/:word", (req, res) => {
   res.send(words.includes(req.params.word));
+});
+
+app.put("/update/word/:word", (req, res) => {
+  if (words.includes(req.params.word)) {
+    wordOfTheDay = req.params.word;
+    res.send(wordOfTheDay);
+  } else {
+    res.send("Can't Find The Word In The Word List");
+  }
+});
+
+app.post("/add/word/:word", (req, res) => {
+  if (!words.includes(req.params.word)) {
+    if (req.params.word.length > 5) {
+      words.push(req.params.word);
+      res.send("Word Added Successfully");
+    } else {
+      res.send("Make Sure That The Word's Length is 5");
+    }
+  } else {
+    res.send("The Word Is Already In The Word List");
+  }
+});
+
+app.get("/word/", (req, res) => {
+  res.send(wordOfTheDay);
 });
 
 app.use(express.static("./"));

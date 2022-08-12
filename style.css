@@ -1,21 +1,47 @@
+:root {
+  --black: #121213;
+  --gray: #37373d;
+  --white: azure;
+}
+
 body {
   background-color: #121213;
 }
 
-h1 {
-  color: azure;
+body.light {
+  background-color: var(--white);
+}
+
+#header.dark {
+  color: var(--white);
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+#header.light {
+  color: var(--black);
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 .letter {
   width: 100px;
   height: 100px;
-  background-color: #1a1a1b;
-  border: 3px solid #272729;
+  background-color: var(--black);
+  border: 3px solid var(--gray);
   margin: 5px;
   font-size: 30px;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  color: azure;
+  color: var(--white);
+}
+
+.letter.light {
+  width: 100px;
+  height: 100px;
+  background-color: var(--white);
+  border: 3px solid var(--gray);
+  margin: 5px;
+  font-size: 30px;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  color: var(--black);
 }
 
 .letter:hover {
@@ -34,4 +60,13 @@ h1 {
 
 .animate__animated.animate__flipInX {
   --animate-duration: 0.5s;
+}
+
+#theme {
+  position: relative;
+  width: 400px;
+  height: auto;
+  /* border: 3px solid red; */
+  color: azure;
+  padding-left: 50px;
 }
