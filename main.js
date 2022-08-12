@@ -15,12 +15,14 @@ const theme = () => {
       letters[i].classList.add("light");
     }
     theme_status = false;
+    document.getElementById("change").classList.add("light");
   } else {
     document.getElementById("header").classList.add("dark");
     document.getElementById("header").classList.remove("light");
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.remove("light");
     }
+    document.getElementById("change").classList.remove("light");
     theme_status = true;
   }
 };
@@ -187,3 +189,77 @@ document.addEventListener("keypress", async (event) => {
     }
   }
 });
+
+const keyboadClick = async (event) => {
+  if (!isWinner) {
+    if (event === "NumpadSubtract") {
+      let wordDiv = target.children[curWord];
+      if (curChar > 0) {
+        let charToDel = wordDiv.children[curChar - 1];
+        charToDel.innerHTML = " ";
+        curChar -= 1;
+        wordToSubmit = wordToSubmit.slice(0, -1);
+      }
+    } else {
+      if (curChar === 5) {
+        if (event === "Enter") {
+          let api_res = await axios.get(
+            `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
+          );
+          if (api_res.data) {
+            const api_win_check = await axios.get(
+              `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
+            );
+            console.log(api_win_check.data.colors);
+
+            let wordDiv = target.children[curWord];
+
+            for (i = 0; i < api_win_check.data.colors.length; i++) {
+              let charArr = wordDiv.children[i];
+
+              wordDiv.children[i].style.backgroundColor =
+                api_win_check.data.colors[i];
+              await animateCSS(charArr, "flipInX");
+            }
+            if (api_win_check.data.win) {
+              isWinner = true;
+            }
+            wordToSubmit = "";
+            curWord += 1;
+            curChar = 0;
+          } else {
+            let wordDiv = target.children[curWord];
+            for (i = 0; i < 5; i++) {
+              let charArr = wordDiv.children[i];
+              animateCSS(charArr, "tada");
+            }
+          }
+        } else {
+          let wordDiv = target.children[curWord];
+          for (i = 0; i < 5; i++) {
+            let charArr = wordDiv.children[i];
+            animateCSS(charArr, "tada");
+          }
+        }
+      } else {
+        if (curWord === 6) {
+          alert("Refresh");
+        } else {
+          if (alphabet.includes(event)) {
+            let wordDiv = target.children[curWord];
+            let charArr = wordDiv.children[curChar];
+            charArr.innerHTML = `<center> <h3>${event.toUpperCase()}</h3> </center>`;
+            curChar += 1;
+            wordToSubmit += event;
+            animateCSS(charArr, "heartBeat");
+          }
+          if (curWord === 0) {
+            document.removeEventListener("keydown", async (event) => {
+              curWord = 0;
+            });
+          }
+        }
+      }
+    }
+  }
+};

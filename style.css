@@ -95,3 +95,43 @@ body.light {
 a {
   color: var(--animate-duration);
 }
+
+/* Keyboard */
+
+#keyboard-cont div {
+  display: flex;
+  justify-content: center;
+}
+
+.second-row {
+  margin: 10px;
+}
+
+.keyboard-button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: var(--gray);
+  color: var(--white);
+  border-radius: 5px;
+}
+
+.keyboard-button.light {
+  all: unset;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 5px;
+}
+
+.keyboard-button:active {
+  background-color: #757778;
+}

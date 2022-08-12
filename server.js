@@ -5622,7 +5622,7 @@ const words = [
   "biffy",
   "pupal",
 ];
-const word_list = [];
+let word_list = [];
 
 app.use(express.json());
 app.use(cors());
