@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
+// const axios = require("axios");
 const words = [
   "which",
   "there",
@@ -5624,9 +5624,9 @@ const words = [
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Welcome to wordle express backend!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to wordle express backend!");
+// });
 
 app.get("/health", (req, res) => {
   res.send("I am very healthy");
@@ -5636,45 +5636,42 @@ app.get("/check/word/:word", (req, res) => {
   if (req.params.word === "hello") {
     res.json({
       win: true,
-      color: ["green", "green", "green", "green", "green"],
+      colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
     });
   } else {
     const wordArr = ["h", "e", "l", "l", "o"];
-    const colors = new Array();
+    const colors = ["#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c"];
     const myWord = `${req.params.word}`.split("");
     for (let i = 0; i < 5; i++) {
       if (myWord[i] === wordArr[i]) {
-        colors[i] = "green";
+        colors[i] = "#6aaa64";
       } else {
         if (wordArr.includes(myWord[i])) {
           let times = 0;
-          let realtimes = -2;
-          let temp_bool = false;
+          let realtimes = 0;
           for (let k = 0; k < 5; k++) {
-            if (myWord[i] === myWord[k]) {
+            if (myWord[k] === wordArr[i] && colors[k] !== "#6aaa64") {
+              times += 1;
+            }
+          }
+          for (let f = 0; f < 5; f++) {
+            if (wordArr[f] === wordArr[f] && colors[f] !== "#6aaa64") {
               realtimes += 1;
             }
-            // console.log(k);
           }
-          for (j = 0; j < 5; j++) {
-            if (myWord[j] === myWord[i] && i != j) times += 1;
-            if (realtimes !== 0) {
-              realtimes -= 1;
-              colors[j] = "yellow";
-            } else {
-              colors[j] = "gray";
+          for (let f = 0; f < 5; f++) {
+            if (wordArr.includes(myWord[f])) {
+              if (realtimes - 1 > times) {
+                realtimes -= 100;
+                colors[f] = "#c9b458";
+              } else {
+                realtimes -= 1;
+                colors[f] = "#3a3a3c";
+              }
             }
-            // if (times > realtimes - 1) {
-            //
-            //   temp_bool = true;
-            // } else {
-            //   if (temp_bool) {
-            //     colors[j] = "gray";
-            //   }
-            // }
           }
         } else {
-          colors[i] = "gray";
+          colors[i] = "#3a3a3c";
         }
       }
     }
@@ -5689,4 +5686,5 @@ app.get("/check/inwords/:word", (req, res) => {
   res.send(words.includes(req.params.word));
 });
 
+app.use(express.static("./"));
 app.listen(8000, () => console.log("localhost:8000"));

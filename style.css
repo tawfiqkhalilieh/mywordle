@@ -1,0 +1,37 @@
+body {
+  background-color: #121213;
+}
+
+h1 {
+  color: azure;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.letter {
+  width: 100px;
+  height: 100px;
+  background-color: #1a1a1b;
+  border: 3px solid #272729;
+  margin: 5px;
+  font-size: 30px;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  color: azure;
+}
+
+.letter:hover {
+  transform: scale(1.1);
+}
+
+.word {
+  display: flex;
+  justify-content: center;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.game {
+  width: 100%;
+}
+
+.animate__animated.animate__flipInX {
+  --animate-duration: 0.5s;
+}
