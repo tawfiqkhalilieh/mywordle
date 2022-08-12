@@ -5633,6 +5633,7 @@ app.get("/health", (req, res) => {
 
 app.get("/check/word/:word", (req, res) => {
   if (req.params.word === wordOfTheDay) {
+    word_list = [];
     res.json({
       win: true,
       colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
@@ -5660,7 +5661,7 @@ app.get("/check/word/:word", (req, res) => {
           }
           for (let f = 0; f < 5; f++) {
             if (wordArr.includes(myWord[f])) {
-              if (realtimes - 1 > times) {
+              if (realtimes > times) {
                 realtimes -= 100;
                 colors[f] = "#c9b458";
               } else {
