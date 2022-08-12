@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 let wordOfTheDay = "hello";
+
 // const axios = require("axios");
 const words = [
   "which",
@@ -5621,6 +5622,7 @@ const words = [
   "biffy",
   "pupal",
 ];
+const word_list = [];
 
 app.use(express.json());
 app.use(cors());
@@ -5675,6 +5677,77 @@ app.get("/check/word/:word", (req, res) => {
     res.json({
       win: false,
       colors: colors,
+    });
+  }
+});
+
+app.get("/hardmode/check/word/:word", (req, res) => {
+  const myWord = `${req.params.word}`.split("");
+  for (let i = 0; i < word_list.length; i++) {
+    if (!myWord.includes(word_list[i])) {
+      res.json({
+        win: false,
+        pass: false,
+      });
+      return;
+    }
+  }
+  if (req.params.word === wordOfTheDay) {
+    res.json({
+      win: true,
+      colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
+      pass: true,
+    });
+  } else {
+    const wordArr = `${wordOfTheDay}`.split("");
+    const colors = ["#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c"];
+
+    for (let i = 0; i < 5; i++) {
+      if (myWord[i] === wordArr[i]) {
+        colors[i] = "#6aaa64";
+        if (!word_list.includes(wordArr[i])) {
+          word_list.push(wordArr[i]);
+        }
+      } else {
+        if (wordArr.includes(myWord[i])) {
+          let times = 0;
+          let realtimes = 0;
+          for (let k = 0; k < 5; k++) {
+            if (myWord[k] === wordArr[i] && colors[k] !== "#6aaa64") {
+              times += 1;
+            }
+          }
+          for (let f = 0; f < 5; f++) {
+            if (wordArr[f] === wordArr[f] && colors[f] !== "#6aaa64") {
+              realtimes += 1;
+            }
+          }
+          for (let f = 0; f < 5; f++) {
+            if (wordArr.includes(myWord[f])) {
+              if (realtimes - 1 > times) {
+                realtimes -= 100;
+                colors[f] = "#c9b458";
+                if (!word_list.includes(myWord[f])) {
+                  word_list.push(myWord[f]);
+                }
+              } else {
+                realtimes -= 1;
+                colors[f] = "#3a3a3c";
+                if (!word_list.includes(myWord[f])) {
+                  word_list.push(myWord[f]);
+                }
+              }
+            }
+          }
+        } else {
+          colors[i] = "#3a3a3c";
+        }
+      }
+    }
+    res.json({
+      win: false,
+      colors: colors,
+      pass: true,
     });
   }
 });

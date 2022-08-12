@@ -6,6 +6,7 @@
 
 body {
   background-color: #121213;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 body.light {
@@ -66,7 +67,31 @@ body.light {
   position: relative;
   width: 400px;
   height: auto;
-  /* border: 3px solid red; */
   color: azure;
   padding-left: 50px;
+  padding-right: 50px;
+}
+
+.change {
+  position: absolute;
+  top: 95;
+  right: 0;
+  width: 400px;
+  height: auto;
+  color: var(--white);
+  padding-left: 50px;
+}
+
+.change.light {
+  position: absolute;
+  top: 95;
+  right: 0;
+  width: 400px;
+  height: auto;
+  color: var(--black);
+  padding-left: 50px;
+}
+
+a {
+  color: var(--animate-duration);
 }
