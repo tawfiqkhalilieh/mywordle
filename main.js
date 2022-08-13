@@ -94,6 +94,15 @@ const checkCookies_tries_5 = () => {
   }
 };
 
+const reset_tries = () => {
+  setCookie("tries_0", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_1", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_2", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_3", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_4", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_5", [0, 0, 0, 0, 0], 365);
+};
+
 const theme = () => {
   document.body.classList.toggle("light");
   const letters = document.querySelectorAll(".letter");
@@ -252,6 +261,7 @@ document.addEventListener("keypress", async (event) => {
             }
             if (api_win_check.data.win) {
               isWinner = true;
+              reset_tries();
             }
             wordToSubmit = "";
             curWord += 1;
@@ -332,6 +342,7 @@ const keyboadClick = async (event) => {
               await animateCSS(charArr, "flipInX");
             }
             if (api_win_check.data.win) {
+              reset_tries();
               isWinner = true;
             }
             wordToSubmit = "";
