@@ -296,6 +296,7 @@ document.addEventListener("keypress", async (event) => {
 });
 
 const keyboadClick = async (event) => {
+  console.log(event);
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
@@ -312,11 +313,12 @@ const keyboadClick = async (event) => {
     } else {
       if (curChar === 5) {
         if (event === "Enter") {
-          let api_res = await fetch(
+          let api_res = await axios.get(
             `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
+          console.log(api_res);
           if (api_res.data) {
-            const api_win_check = await fetch(
+            const api_win_check = await axios.get(
               `/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
 
