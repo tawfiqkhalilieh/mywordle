@@ -308,7 +308,6 @@ document.addEventListener("keypress", async (event) => {
 });
 
 const keyboadClick = async (event) => {
-  // console.log(event);
   if (!isWinner) {
     if (
       event === "NumpadSubtract" ||
@@ -321,6 +320,8 @@ const keyboadClick = async (event) => {
         charToDel.innerHTML = " ";
         curChar -= 1;
         wordToSubmit = wordToSubmit.slice(0, -1);
+        tries[curWord][curChar] = 0;
+        update_cookies_tries();
       }
     } else {
       if (curChar === 5) {

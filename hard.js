@@ -226,13 +226,19 @@ for (var i = 0; i < 6; i++) {
 
 document.addEventListener("keypress", async (event) => {
   if (!isWinner) {
-    if (event.code === "NumpadSubtract") {
+    if (
+      event.code === "NumpadSubtract" ||
+      event.code === "Backspace" ||
+      event.code === "backspace"
+    ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
         let charToDel = wordDiv.children[curChar - 1];
         charToDel.innerHTML = " ";
         curChar -= 1;
         wordToSubmit = wordToSubmit.slice(0, -1);
+        tries[curWord][curChar] = 0;
+        update_cookies_tries();
       }
     } else {
       if (curChar === 5) {
@@ -245,7 +251,7 @@ document.addEventListener("keypress", async (event) => {
             const api_win_check = await axios.get(
               `/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
-            console.log(api_win_check);
+
             if (api_win_check.data.pass) {
               console.log(api_win_check.data.colors);
 
@@ -260,6 +266,7 @@ document.addEventListener("keypress", async (event) => {
               }
               if (api_win_check.data.win) {
                 isWinner = true;
+                reset_tries();
               }
               wordToSubmit = "";
               curWord += 1;
@@ -287,11 +294,14 @@ document.addEventListener("keypress", async (event) => {
         }
       } else {
         if (curWord === 6) {
+          setCookie("streak", 0);
           alert("Refresh");
         } else {
           if (alphabet.includes(event.key)) {
             let wordDiv = target.children[curWord];
             let charArr = wordDiv.children[curChar];
+            tries[curWord][curChar] = event.key.toUpperCase();
+            update_cookies_tries();
             charArr.innerHTML = `<center> <h3>${event.key.toUpperCase()}</h3> </center>`;
             curChar += 1;
             wordToSubmit += event.key;
@@ -310,13 +320,19 @@ document.addEventListener("keypress", async (event) => {
 
 const keyboadClick = async (event) => {
   if (!isWinner) {
-    if (event === "NumpadSubtract") {
+    if (
+      event === "NumpadSubtract" ||
+      event === "Backspace" ||
+      event === "backspace"
+    ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
         let charToDel = wordDiv.children[curChar - 1];
         charToDel.innerHTML = " ";
         curChar -= 1;
         wordToSubmit = wordToSubmit.slice(0, -1);
+        tries[curWord][curChar] = 0;
+        update_cookies_tries();
       }
     } else {
       if (curChar === 5) {
@@ -328,7 +344,6 @@ const keyboadClick = async (event) => {
             const api_win_check = await axios.get(
               `/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
-            console.log(api_win_check.data.colors);
 
             let wordDiv = target.children[curWord];
 
@@ -340,6 +355,7 @@ const keyboadClick = async (event) => {
               await animateCSS(charArr, "flipInX");
             }
             if (api_win_check.data.win) {
+              reset_tries();
               isWinner = true;
             }
             wordToSubmit = "";
@@ -363,18 +379,23 @@ const keyboadClick = async (event) => {
         if (curWord === 6) {
           alert("Refresh");
         } else {
-          if (alphabet.includes(event)) {
-            let wordDiv = target.children[curWord];
-            let charArr = wordDiv.children[curChar];
-            charArr.innerHTML = `<center> <h3>${event.toUpperCase()}</h3> </center>`;
-            curChar += 1;
-            wordToSubmit += event;
-            animateCSS(charArr, "heartBeat");
-          }
-          if (curWord === 0) {
-            document.removeEventListener("keydown", async (event) => {
-              curWord = 0;
-            });
+          if (curWord === 6) {
+            setCookie("streak", 0);
+            alert("Refresh");
+          } else {
+            if (alphabet.includes(event)) {
+              let wordDiv = target.children[curWord];
+              let charArr = wordDiv.children[curChar];
+              charArr.innerHTML = `<center> <h3>${event.toUpperCase()}</h3> </center>`;
+              curChar += 1;
+              wordToSubmit += event;
+              animateCSS(charArr, "heartBeat");
+            }
+            if (curWord === 0) {
+              document.removeEventListener("keydown", async (event) => {
+                curWord = 0;
+              });
+            }
           }
         }
       }
