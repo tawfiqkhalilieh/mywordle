@@ -46,6 +46,14 @@ function setCookie(cname, cvalue, exdays) {
 
 // tries fucntions
 
+const checkCookies_tries_0 = () => {
+  let tries_0 = getCookie("tries_0");
+  if (!tries_0 != "") {
+    tries_0 = [0, 0, 0, 0, 0];
+    setCookie("tries_0", tries_0, 1);
+  }
+};
+
 const checkCookies_tries_1 = () => {
   let tries_1 = getCookie("tries_1");
   if (!tries_1 != "") {
@@ -86,20 +94,11 @@ const checkCookies_tries_5 = () => {
   }
 };
 
-const checkCookies_tries_6 = () => {
-  let tries_6 = getCookie("tries_6");
-  if (!tries_6 != "") {
-    tries_6 = [0, 0, 0, 0, 0];
-    setCookie("tries_6", tries_6, 1);
-  }
-};
-
 const theme = () => {
   document.body.classList.toggle("light");
   const letters = document.querySelectorAll(".letter");
   const keyboard_buttons_first_row_keys =
     document.querySelectorAll("#keyboard-button");
-  console.log(keyboard_buttons_first_row_keys);
   if (theme_status) {
     document.getElementById("header").classList.add("light");
     document.getElementById("header").classList.remove("dark");
@@ -224,6 +223,8 @@ document.addEventListener("keypress", async (event) => {
         charToDel.innerHTML = " ";
         curChar -= 1;
         wordToSubmit = wordToSubmit.slice(0, -1);
+        tries[curWord][curChar] = 0;
+        update_cookies_tries();
       }
     } else {
       if (curChar === 5) {
@@ -235,7 +236,6 @@ document.addEventListener("keypress", async (event) => {
             const api_win_check = await axios.get(
               `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
-            console.log(api_win_check.data.colors);
 
             let wordDiv = target.children[curWord];
 
@@ -273,6 +273,8 @@ document.addEventListener("keypress", async (event) => {
           if (alphabet.includes(event.key)) {
             let wordDiv = target.children[curWord];
             let charArr = wordDiv.children[curChar];
+            tries[curWord][curChar] = event.key.toUpperCase();
+            update_cookies_tries();
             charArr.innerHTML = `<center> <h3>${event.key.toUpperCase()}</h3> </center>`;
             curChar += 1;
             wordToSubmit += event.key;
@@ -302,14 +304,13 @@ const keyboadClick = async (event) => {
     } else {
       if (curChar === 5) {
         if (event === "Enter") {
-          let api_res = await axios.get(
+          let api_res = await fetch(
             `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
           if (api_res.data) {
-            const api_win_check = await axios.get(
+            const api_win_check = await fetch(
               `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
-            console.log(api_win_check.data.colors);
 
             let wordDiv = target.children[curWord];
 
@@ -365,20 +366,40 @@ const keyboadClick = async (event) => {
 
 checkCookies();
 checkCookies_streak();
+checkCookies_tries_0();
 checkCookies_tries_1();
 checkCookies_tries_2();
 checkCookies_tries_3();
 checkCookies_tries_4();
 checkCookies_tries_5();
-checkCookies_tries_6();
-console.log(document.cookie);
 
 const tries = [
+  getCookie("tries_0").split(","),
   getCookie("tries_1").split(","),
   getCookie("tries_2").split(","),
   getCookie("tries_3").split(","),
   getCookie("tries_4").split(","),
   getCookie("tries_5").split(","),
-  getCookie("tries_6").split(","),
 ];
-console.log(tries);
+
+const update_cookies_tries = () => {
+  let i = 0;
+  tries.forEach((el) => {
+    setCookie(`tries_${i}`, el.toString(), 1);
+    i += 1;
+  });
+};
+update_cookies_tries();
+
+const fill_array = async () => {
+  for (let i = 0; i < 6; i++) {
+    let wordDiv = target.children[i];
+    for (let j = 0; j < 5; j++) {
+      await keyboadClick(tries[i][j]);
+    }
+    await keyboadClick("Enter");
+  }
+  await keyboadClick("Enter");
+};
+
+fill_array();

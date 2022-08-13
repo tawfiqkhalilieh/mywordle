@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-let wordOfTheDay = "hunkey";
+let wordOfTheDay = "hunky";
 
 // const axios = require("axios");
 const words = [
@@ -5634,10 +5634,12 @@ app.get("/health", (req, res) => {
 app.get("/check/word/:word", (req, res) => {
   if (req.params.word === wordOfTheDay) {
     word_list = [];
-    res.json({
-      win: true,
-      colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
-    });
+    res
+      .json({
+        win: true,
+        colors: ["#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64", "#6aaa64"],
+      })
+      .status(200);
   } else {
     const wordArr = `${wordOfTheDay}`.split("");
     const colors = ["#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c", "#3a3a3c"];
@@ -5675,10 +5677,12 @@ app.get("/check/word/:word", (req, res) => {
         }
       }
     }
-    res.json({
-      win: false,
-      colors: colors,
-    });
+    res
+      .json({
+        win: false,
+        colors: colors,
+      })
+      .status(200);
   }
 });
 
