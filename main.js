@@ -299,9 +299,9 @@ const keyboadClick = async (event) => {
   console.log(event);
   if (!isWinner) {
     if (
-      event.code === "NumpadSubtract" ||
-      event.code === "Backspace" ||
-      event.code === "backspace"
+      event === "NumpadSubtract" ||
+      event === "Backspace" ||
+      event === "backspace"
     ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
