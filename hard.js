@@ -94,12 +94,21 @@ const checkCookies_tries_5 = () => {
   }
 };
 
+const reset_tries = () => {
+  setCookie("tries_0", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_1", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_2", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_3", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_4", [0, 0, 0, 0, 0], 365);
+  setCookie("tries_5", [0, 0, 0, 0, 0], 365);
+  setCookie("streak", Number(getCookie("streak")) + 1);
+};
+
 const theme = () => {
   document.body.classList.toggle("light");
   const letters = document.querySelectorAll(".letter");
   const keyboard_buttons_first_row_keys =
     document.querySelectorAll("#keyboard-button");
-  console.log(keyboard_buttons_first_row_keys);
   if (theme_status) {
     document.getElementById("header").classList.add("light");
     document.getElementById("header").classList.remove("dark");
@@ -299,21 +308,6 @@ document.addEventListener("keypress", async (event) => {
   }
 });
 
-const fill_array = async () => {
-  for (let i = 0; i < 6; i++) {
-    let wordDiv = target.children[i];
-    for (let j = 0; j < 5; j++) {
-      if (tries[i][j] === "0" && tries[i][j] === 0) {
-        return;
-      }
-      console.log(tries[i][j]);
-      await keyboadClick(tries[i][j]);
-      console.log("Enter");
-      await keyboadClick("Enter");
-    }
-  }
-};
-
 const keyboadClick = async (event) => {
   if (!isWinner) {
     if (event === "NumpadSubtract") {
@@ -396,7 +390,6 @@ checkCookies_tries_2();
 checkCookies_tries_3();
 checkCookies_tries_4();
 checkCookies_tries_5();
-console.log(document.cookie);
 
 const tries = [
   getCookie("tries_0").split(","),
@@ -416,5 +409,15 @@ const update_cookies_tries = () => {
 };
 update_cookies_tries();
 
+const fill_array = async () => {
+  for (let i = 0; i < 6; i++) {
+    let wordDiv = target.children[i];
+    for (let j = 0; j < 5; j++) {
+      await keyboadClick(tries[i][j]);
+    }
+    await keyboadClick("Enter");
+  }
+  await keyboadClick("Enter");
+};
+
 fill_array();
-console.log(tries);

@@ -101,6 +101,7 @@ const reset_tries = () => {
   setCookie("tries_3", [0, 0, 0, 0, 0], 365);
   setCookie("tries_4", [0, 0, 0, 0, 0], 365);
   setCookie("tries_5", [0, 0, 0, 0, 0], 365);
+  setCookie("streak", Number(getCookie("streak")) + 1);
 };
 
 const theme = () => {
@@ -282,6 +283,7 @@ document.addEventListener("keypress", async (event) => {
         }
       } else {
         if (curWord === 6) {
+          setCookie("streak", 0);
           alert("Refresh");
         } else {
           if (alphabet.includes(event.key)) {
@@ -306,7 +308,7 @@ document.addEventListener("keypress", async (event) => {
 });
 
 const keyboadClick = async (event) => {
-  console.log(event);
+  // console.log(event);
   if (!isWinner) {
     if (
       event === "NumpadSubtract" ||
@@ -364,6 +366,7 @@ const keyboadClick = async (event) => {
         }
       } else {
         if (curWord === 6) {
+          setCookie("streak", 0);
           alert("Refresh");
         } else {
           if (alphabet.includes(event)) {
