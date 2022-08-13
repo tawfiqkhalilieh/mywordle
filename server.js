@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+PORT = process.env.PORT || 8000;
 let wordOfTheDay = "hunky";
 
-// const axios = require("axios");
 const words = [
   "which",
   "there",
@@ -5788,4 +5788,4 @@ app.get("/word/", (req, res) => {
 });
 
 app.use(express.static("./"));
-app.listen(process.env.PORT, () => console.log("localhost:8000"));
+app.listen(PORT, () => console.log(`localhost:${PORT}`));

@@ -297,7 +297,11 @@ document.addEventListener("keypress", async (event) => {
 
 const keyboadClick = async (event) => {
   if (!isWinner) {
-    if (event === "NumpadSubtract") {
+    if (
+      event.code === "NumpadSubtract" ||
+      event.code === "Backspace" ||
+      event.code === "backspace"
+    ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
         let charToDel = wordDiv.children[curChar - 1];

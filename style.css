@@ -135,3 +135,78 @@ a {
 .keyboard-button:active {
   background-color: #757778;
 }
+
+@media only screen and (max-width: 480px) {
+  .keyboard-button {
+    padding: 0.65rem;
+  }
+}
+
+@media only screen and (max-width: 385px) {
+  .keyboard-button {
+    padding: 0.45rem;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .keyboard-button {
+    padding: 0.35rem;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .keyboard-button {
+    padding: 0.25rem;
+  }
+}
+
+@media only screen and (max-width: 270px) {
+  .keyboard-button {
+    padding: 0.15rem;
+  }
+}
+
+@media only screen and (max-height: 790px) {
+  .char {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #3a3a3c;
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-height: 670px) {
+  .char {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #3a3a3c;
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-height: 650px) {
+  .char {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #3a3a3c;
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-height: 610px) {
+  .char {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #3a3a3c;
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-height: 485px) {
+  .char {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3a3a3c;
+    margin: 3px;
+  }
+}
