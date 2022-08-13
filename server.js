@@ -5761,16 +5761,20 @@ app.get("/check/inwords/:word", (req, res) => {
   res.send(words.includes(req.params.word));
 });
 
-app.put("/update/word/:word", (req, res) => {
-  if (words.includes(req.params.word)) {
-    wordOfTheDay = req.params.word;
-    res.send(wordOfTheDay);
+app.put("/update/word/:word/:taw", (req, res) => {
+  if (req.query.taw === "taw") {
+    if (words.includes(req.params.word)) {
+      wordOfTheDay = req.params.word;
+      res.send(wordOfTheDay);
+    } else {
+      res.send("Can't Find The Word In The Word List");
+    }
   } else {
-    res.send("Can't Find The Word In The Word List");
+    res.status(403);
   }
 });
 
-app.post("/add/word/:word", (req, res) => {
+app.post("/add/word/:word/", (req, res) => {
   if (!words.includes(req.params.word)) {
     if (req.params.word.length > 5) {
       words.push(req.params.word);
