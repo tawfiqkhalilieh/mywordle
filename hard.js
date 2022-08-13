@@ -7,12 +7,18 @@ let theme_status = true;
 const theme = () => {
   document.body.classList.toggle("light");
   const letters = document.querySelectorAll(".letter");
+  const keyboard_buttons_first_row_keys =
+    document.querySelectorAll("#keyboard-button");
+  console.log(keyboard_buttons_first_row_keys);
   if (theme_status) {
     document.getElementById("header").classList.add("light");
     document.getElementById("header").classList.remove("dark");
     document.getElementById("header").classList.theme_status = false;
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.add("light");
+    }
+    for (let i = 0; i < keyboard_buttons_first_row_keys.length; i++) {
+      keyboard_buttons_first_row_keys[i].classList.add("light");
     }
     theme_status = false;
     document.getElementById("change").classList.add("light");
@@ -21,6 +27,9 @@ const theme = () => {
     document.getElementById("header").classList.remove("light");
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.remove("light");
+    }
+    for (let i = 0; i < keyboard_buttons_first_row_keys.length; i++) {
+      keyboard_buttons_first_row_keys[i].classList.remove("light");
     }
     document.getElementById("change").classList.remove("light");
     theme_status = true;

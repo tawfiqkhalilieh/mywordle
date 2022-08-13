@@ -2,17 +2,113 @@ let curWord = 0;
 let curChar = 0;
 const target = document.querySelector("#game");
 let isWinner = false;
-
 let theme_status = true;
+
+const checkCookies = () => {
+  let id = getCookie("id");
+  if (id === "") {
+    id = prompt("Please enter your name:", "");
+    if (id != "" && id != null) {
+      setCookie("id", id, 365);
+    }
+  }
+};
+
+const checkCookies_streak = () => {
+  let streak = getCookie("streak");
+  if (!streak != "") {
+    streak = 0;
+    setCookie("streak", streak, 365);
+  }
+};
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// tries fucntions
+
+const checkCookies_tries_1 = () => {
+  let tries_1 = getCookie("tries_1");
+  if (!tries_1 != "") {
+    tries_1 = ["0", 0, 0, 0, 0];
+    setCookie("tries_1", tries_1, 1);
+  }
+};
+
+const checkCookies_tries_2 = () => {
+  let tries_2 = getCookie("tries_2");
+  if (!tries_2 != "") {
+    tries_2 = ["0", 0, 0, 0, 0];
+    setCookie("tries_2", tries_2, 1);
+  }
+};
+
+const checkCookies_tries_3 = () => {
+  let tries_3 = getCookie("tries_3");
+  if (!tries_3 != "") {
+    tries_3 = ["0", 0, 0, 0, 0];
+    setCookie("tries_3", tries_3, 1);
+  }
+};
+
+const checkCookies_tries_4 = () => {
+  let tries_4 = getCookie("tries_4");
+  if (!tries_4 != "") {
+    tries_4 = ["0", 0, 0, 0, 0];
+    setCookie("tries_4", tries_4, 1);
+  }
+};
+
+const checkCookies_tries_5 = () => {
+  let tries_5 = getCookie("tries_5");
+  if (!tries_5 != "") {
+    tries_5 = [0, 0, 0, 0, 0];
+    setCookie("tries_5", tries_5, 1);
+  }
+};
+
+const checkCookies_tries_6 = () => {
+  let tries_6 = getCookie("tries_6");
+  if (!tries_6 != "") {
+    tries_6 = [0, 0, 0, 0, 0];
+    setCookie("tries_6", tries_6, 1);
+  }
+};
+
 const theme = () => {
   document.body.classList.toggle("light");
   const letters = document.querySelectorAll(".letter");
+  const keyboard_buttons_first_row_keys =
+    document.querySelectorAll("#keyboard-button");
+  console.log(keyboard_buttons_first_row_keys);
   if (theme_status) {
     document.getElementById("header").classList.add("light");
     document.getElementById("header").classList.remove("dark");
     document.getElementById("header").classList.theme_status = false;
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.add("light");
+    }
+    for (let i = 0; i < keyboard_buttons_first_row_keys.length; i++) {
+      keyboard_buttons_first_row_keys[i].classList.add("light");
     }
     theme_status = false;
     document.getElementById("change").classList.add("light");
@@ -21,6 +117,9 @@ const theme = () => {
     document.getElementById("header").classList.remove("light");
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.remove("light");
+    }
+    for (let i = 0; i < keyboard_buttons_first_row_keys.length; i++) {
+      keyboard_buttons_first_row_keys[i].classList.remove("light");
     }
     document.getElementById("change").classList.remove("light");
     theme_status = true;
@@ -263,3 +362,23 @@ const keyboadClick = async (event) => {
     }
   }
 };
+
+checkCookies();
+checkCookies_streak();
+checkCookies_tries_1();
+checkCookies_tries_2();
+checkCookies_tries_3();
+checkCookies_tries_4();
+checkCookies_tries_5();
+checkCookies_tries_6();
+console.log(document.cookie);
+
+const tries = [
+  getCookie("tries_1").split(","),
+  getCookie("tries_2").split(","),
+  getCookie("tries_3").split(","),
+  getCookie("tries_4").split(","),
+  getCookie("tries_5").split(","),
+  getCookie("tries_6").split(","),
+];
+console.log(tries);

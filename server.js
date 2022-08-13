@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-let wordOfTheDay = "hello";
+let wordOfTheDay = "hunkey";
 
 // const axios = require("axios");
 const words = [
