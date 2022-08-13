@@ -229,12 +229,12 @@ document.addEventListener("keypress", async (event) => {
       if (curChar === 5) {
         if (event.key === "Enter") {
           let api_res = await axios.get(
-            `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
+            `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
           if (api_res.data) {
             // /hardmode/check/word/
             const api_win_check = await axios.get(
-              `http://localhost:8000/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
+              `/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
             console.log(api_win_check);
             if (api_win_check.data.pass) {
@@ -328,11 +328,11 @@ const keyboadClick = async (event) => {
       if (curChar === 5) {
         if (event === "Enter") {
           let api_res = await axios.get(
-            `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
+            `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
           if (api_res.data) {
             const api_win_check = await axios.get(
-              `http://localhost:8000/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
+              `/hardmode/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
             console.log(api_win_check.data.colors);
 

@@ -230,11 +230,11 @@ document.addEventListener("keypress", async (event) => {
       if (curChar === 5) {
         if (event.key === "Enter") {
           let api_res = await axios.get(
-            `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
+            `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
           if (api_res.data) {
             const api_win_check = await axios.get(
-              `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
+              `/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
 
             let wordDiv = target.children[curWord];
@@ -305,11 +305,11 @@ const keyboadClick = async (event) => {
       if (curChar === 5) {
         if (event === "Enter") {
           let api_res = await fetch(
-            `http://localhost:8000/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
+            `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
           if (api_res.data) {
             const api_win_check = await fetch(
-              `http://localhost:8000/check/word/${wordToSubmit.toLocaleLowerCase()}`
+              `/check/word/${wordToSubmit.toLocaleLowerCase()}`
             );
 
             let wordDiv = target.children[curWord];
