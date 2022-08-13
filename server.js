@@ -5788,4 +5788,4 @@ app.get("/word/", (req, res) => {
 });
 
 app.use(express.static("./"));
-app.listen(8000, () => console.log("localhost:8000"));
+app.listen(process.env.PORT, () => console.log("localhost:8000"));
