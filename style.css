@@ -152,6 +152,36 @@ a {
   .keyboard-button {
     padding: 0.35rem;
   }
+
+  .letter {
+    width: 80px;
+    height: 80px;
+    background-color: var(--black);
+    border: 3px solid var(--gray);
+    margin: 5px;
+    font-size: 30px;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    color: var(--white);
+  }
+
+  .letter.light {
+    width: 80px;
+    height: 80px;
+    background-color: var(--white);
+    border: 3px solid var(--gray);
+    margin: 2.5px;
+    font-size: 30px;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    color: var(--black);
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  #header {
+    font-size: 20;
+  }
 }
 
 @media only screen and (max-width: 300px) {
