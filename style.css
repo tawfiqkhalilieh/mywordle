@@ -140,20 +140,8 @@ a {
   .keyboard-button {
     padding: 0.65rem;
   }
-}
 
-@media only screen and (max-width: 385px) {
-  .keyboard-button {
-    padding: 0.45rem;
-  }
-}
-
-@media only screen and (max-width: 330px) {
-  .keyboard-button {
-    padding: 0.35rem;
-  }
-
-  .letter {
+  letter {
     width: 80px;
     height: 80px;
     background-color: var(--black);
@@ -181,6 +169,19 @@ a {
 
   #header {
     font-size: 20;
+    right: 0;
+  }
+}
+
+@media only screen and (max-width: 385px) {
+  .keyboard-button {
+    padding: 0.45rem;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .keyboard-button {
+    padding: 0.35rem;
   }
 }
 
