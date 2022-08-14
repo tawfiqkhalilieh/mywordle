@@ -70,16 +70,18 @@ body.light {
   color: azure;
   padding-left: 50px;
   padding-right: 50px;
+  right: -350px;
 }
 
 .change {
   position: absolute;
   top: 95;
-  right: 0;
   width: 400px;
   height: auto;
   color: var(--white);
   padding-left: 50px;
+  padding-bottom: 15px;
+  right: 45px;
 }
 
 .change.light {
@@ -137,39 +139,52 @@ a {
 }
 
 @media only screen and (max-width: 480px) {
+  .word {
+    margin: auto;
+  }
+  .keyboard-cont {
+    margin: auto;
+    position: absolute;
+  }
+
   .keyboard-button {
     padding: 0.65rem;
   }
 
-  letter {
-    width: 80px;
-    height: 80px;
+  .letter {
+    width: 40px;
+    height: 40px;
     background-color: var(--black);
     border: 3px solid var(--gray);
-    margin: 5px;
-    font-size: 30px;
+    margin: 2.5px;
+    font-size: 20px;
+    padding-bottom: 15px;
     font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
     color: var(--white);
   }
 
   .letter.light {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     background-color: var(--white);
     border: 3px solid var(--gray);
     margin: 2.5px;
-    font-size: 30px;
+    font-size: 20px;
     font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
     color: var(--black);
   }
 
-  h3 {
-    font-size: 30px;
+  h1 {
+    font-size: 30;
   }
 
-  #header {
-    font-size: 20;
-    right: 0;
+  #theme {
+    /* font-size: 10; */
+    left: 200px;
+  }
+
+  #change {
+    left: -20px;
   }
 }
 
