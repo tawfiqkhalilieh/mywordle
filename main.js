@@ -225,11 +225,12 @@ for (var i = 0; i < 6; i++) {
 }
 
 document.addEventListener("keypress", async (event) => {
+  console.log(event);
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
-      event.code === "Backspace" ||
-      event.code === "backspace"
+      event.code.toLowerCase() === "backspace" ||
+      event.key.toLocaleLowerCase() === "backspace"
     ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
@@ -308,11 +309,12 @@ document.addEventListener("keypress", async (event) => {
 });
 
 const keyboadClick = async (event) => {
+  console.log(event);
   if (!isWinner) {
     if (
-      event === "NumpadSubtract" ||
-      event === "Backspace" ||
-      event === "backspace"
+      event.code === "NumpadSubtract" ||
+      event.code.toLowerCase() === "backspace" ||
+      event.key.toLocaleLowerCase() === "backspace"
     ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
