@@ -224,7 +224,7 @@ for (var i = 0; i < 6; i++) {
   }
 }
 
-document.addEventListener("keypress", async (event) => {
+document.addEventListener("keydown", async (event) => {
   console.log(event);
   if (!isWinner) {
     if (

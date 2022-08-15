@@ -224,7 +224,7 @@ for (var i = 0; i < 6; i++) {
   }
 }
 
-document.addEventListener("keypress", async (event) => {
+document.addEventListener("keydown", async (event) => {
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
