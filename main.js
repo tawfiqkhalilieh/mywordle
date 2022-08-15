@@ -312,8 +312,7 @@ const keyboadClick = async (event) => {
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
-      event.code.toLowerCase() === "backspace" ||
-      event.key.toLocaleLowerCase() === "backspace"
+      String(event.code).toLowerCase() === "backspace"
     ) {
       let wordDiv = target.children[curWord];
       if (curChar > 0) {
