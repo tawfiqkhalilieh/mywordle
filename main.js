@@ -4,6 +4,38 @@ const target = document.querySelector("#game");
 let isWinner = false;
 let theme_status = true;
 
+class Navbar {
+  constructor(target, menu) {
+    if (target instanceof HTMLElement && menu instanceof HTMLElement) {
+      this.btn = target;
+      this.menu = menu;
+
+      this.btn.addEventListener("click", () => {
+        this.open();
+      });
+    } else {
+      throw new TypeError(
+        "The Target and Menu arguments must be a DOM element."
+      );
+    }
+  }
+
+  open() {
+    if (this.isopen) {
+      this.menu.classList.add("nav-hidden");
+    } else {
+      this.menu.classList.remove("nav-hidden");
+    }
+
+    this.isopen = !this.isopen;
+  }
+}
+
+const navbar = new Navbar(
+  document.querySelector(".menu-btn"),
+  document.querySelector(".menu-list")
+);
+
 const checkCookies = () => {
   let id = getCookie("id");
   if (id === "") {
@@ -225,7 +257,7 @@ for (var i = 0; i < 6; i++) {
 }
 
 document.addEventListener("keydown", async (event) => {
-  console.log(event);
+  // console.log(event);
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
@@ -284,7 +316,8 @@ document.addEventListener("keydown", async (event) => {
       } else {
         if (curWord === 6) {
           setCookie("streak", 0);
-          alert("Refresh");
+          let word = await axios.get(`/word`);
+          vanillaToast.show(word.data);
         } else {
           if (alphabet.includes(event.key)) {
             let wordDiv = target.children[curWord];
@@ -308,7 +341,7 @@ document.addEventListener("keydown", async (event) => {
 });
 
 const keyboadClick = async (event) => {
-  console.log(event);
+  // console.log(event);
   if (!isWinner) {
     if (
       event.code === "NumpadSubtract" ||
@@ -329,7 +362,7 @@ const keyboadClick = async (event) => {
           let api_res = await axios.get(
             `/check/inwords/${wordToSubmit.toLocaleLowerCase()}`
           );
-          console.log(api_res);
+          // console.log(api_res);
           if (api_res.data) {
             const api_win_check = await axios.get(
               `/check/word/${wordToSubmit.toLocaleLowerCase()}`
@@ -368,12 +401,12 @@ const keyboadClick = async (event) => {
       } else {
         if (curWord === 6) {
           setCookie("streak", 0);
-          alert("Refresh");
+          vanillaToast.show(word.data);
         } else {
           if (alphabet.includes(event)) {
             let wordDiv = target.children[curWord];
             let charArr = wordDiv.children[curChar];
-            charArr.innerHTML = `<center> <h3>${event.toUpperCase()}</h3> </center>`;
+            charArr.innerHTML = `<center> <h3 style="padding-bottom: 30px;">${event.toUpperCase()}</h3> </center>`;
             curChar += 1;
             wordToSubmit += event;
             animateCSS(charArr, "heartBeat");

@@ -8,30 +8,37 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <!-- -->
     <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./vanilla-toast.css" />
+    <script src="./vanilla-toast.js"></script>
+
     <title>Wordle</title>
   </head>
   <body>
-    <br />
-    <div id="header" class="dark">
+    <nav class="main-nav">
+      <a class="logo" style="color: azure">Menu</a>
+      <button class="menu-btn">
+        <div class="bar"></div>
+      </button>
+      <ul class="menu-list nav-hidden">
+        <li class="menu-item">
+          <a href="#">Link 1</a>
+        </li>
+        <li class="menu-item">
+          <a href="#">Link 2</a>
+        </li>
+        <li class="menu-item">
+          <a href="#">Link 3</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- <div id="header" class="dark">
       <center>
         <h1>My Wordle</h1>
       </center>
-    </div>
-    <div
-      style="
-        color: black;
-        position: absolute;
-        margin: auto;
-        left: 720px;
-        padding-top: 10px;
-        height: 10px;
-        background-color: white;
-      "
-    >
-      <h4>Hello</h4>
-    </div>
-    <div class="change" id="change">
+    </div> -->
+    <!-- <div class="change" id="change">
       <a href="/hard.html">
         <h3>Hard Mode</h3>
       </a>
@@ -40,8 +47,8 @@
       <a onclick="theme()">
         <img src="assets/images/theme.png" width="30px" />
       </a>
-    </div>
-    <!-- <hr /> -->
+    </div> -->
+
     <br />
     <div id="game"></div>
     <br />

@@ -4,6 +4,9 @@
   --white: azure;
 }
 
+html {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
 body {
   background-color: #121213;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
@@ -13,7 +16,7 @@ body.light {
   background-color: var(--white);
 }
 
-#header.dark {
+/* #header.dark {
   color: var(--white);
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
@@ -21,26 +24,27 @@ body.light {
 #header.light {
   color: var(--black);
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-}
+} */
 
 .letter {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 40px;
   background-color: var(--black);
   border: 3px solid var(--gray);
-  margin: 5px;
-  font-size: 30px;
+  margin: 2.5px;
+  font-size: 20px;
+  padding-bottom: 15px;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   color: var(--white);
 }
 
 .letter.light {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 40px;
   background-color: var(--white);
   border: 3px solid var(--gray);
-  margin: 5px;
-  font-size: 30px;
+  margin: 2.5px;
+  font-size: 20px;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   color: var(--black);
 }
@@ -254,5 +258,99 @@ a {
     height: 20px;
     border: 2px solid #3a3a3c;
     margin: 3px;
+  }
+}
+
+/* Toasts */
+#vanilla-toast.custom {
+  display: none;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.76);
+  color: #ffffff;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+}
+
+/* Navigation */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: var(--white);
+}
+/* Light */
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.menu-item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.menu-item a,
+.logo {
+  text-decoration: none;
+  color: #333;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.menu-btn {
+  display: none;
+  width: 35px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bar {
+  height: 3px;
+  background-color: #333;
+  margin: 0.5rem 0;
+}
+
+.menu-btn::after,
+.menu-btn::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background-color: #333;
+}
+
+@media (max-width: 400px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+  }
+
+  .menu-list {
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+  }
+
+  .menu-item {
+    margin-top: 0.5rem;
+  }
+
+  .nav-hidden {
+    display: none;
   }
 }
